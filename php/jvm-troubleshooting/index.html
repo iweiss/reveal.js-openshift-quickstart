@@ -8,11 +8,18 @@
 		<title>JVM Troubleshooting basics</title>
 
 		<link rel="stylesheet" href="../css/reveal.min.css" />
-		<link rel="stylesheet" href="../css/theme/sky.css" id="theme" />
+		<link rel="stylesheet" href="../css/theme/openshift/openshift.css" id="theme" />
 		<link rel="stylesheet" href="../lib/css/zenburn.css" />
 
+		<!-- If the query includes 'print-pdf', include the PDF print sheet -->
 		<script>
-			document.write('<link rel="stylesheet" href="css/print/' + ( window.location.search.match( /print-pdf/gi ) ? 'pdf' : 'paper' ) + '.css" type="text/css" media="print">');
+			if( window.location.search.match( /print-pdf/gi ) ) {
+				var link = document.createElement( 'link' );
+				link.rel = 'stylesheet';
+				link.type = 'text/css';
+				link.href = '../css/print/pdf.css';
+				document.getElementsByTagName( 'head' )[0].appendChild( link );
+			}
 		</script>
 
 		<!--[if lt IE 9]>
@@ -57,13 +64,31 @@
 					<h2>What to ask for?</h2>
 					<br />
 					<ul>
-						<li><font color="red">Performance?</font> Garbage Collection(GC) logs.</li>
-						<li><font color="red">OutOfMemoryError?</font> Heap dump most of the time.</li>
+						<li><font color="red">Performance? Slow server?</font></li>
 						<ul>
-							<li>Exception: Unable to create native threads</li>
+							<li>Garbage Collection(GC) log.</li>
 						</ul>
-						<li><font color="red">Lockup?</font> High CPU? Thread dump</li>
+						<li><font color="red">OutOfMemoryError:</font></li>
+						<ul>
+							<li><font color="red">Out of heap?</font> Heap dump</li>
+							<li><font color="red">Out of PermGen?</font> GC log</li>
+							<li><font color="red">Native threads?</font> Nothing Java specific</li>
+						</ul>
+						<li><font color="red">Lockup? High CPU? Slow startup/shutdown?</font></li>
+						<ul>
+							<li>Thread dump</li>
+						</ul>
 					</ul>
+				</section>
+
+				<section>
+					<h2>Now What?</h2>
+					<h2>What does it mean?</h2>
+					<br />
+					<ul>
+						<li>GC log shows memory consumption, transition and Full GC cycles</li>
+						<li>Heap dump shows what the JVM memory looks like at a specific point in time</li>
+						<li>Thread dump shows</li>
 				</section>
 			</div>
 		</div>
@@ -80,18 +105,21 @@
 				progress: true,
 				history: true,
 				center: true,
+				slideNumber: true,
+				touch: true,
+				embedded: true,
 
 				theme: Reveal.getQueryHash().theme, // available themes are in /css/theme
-				transition: Reveal.getQueryHash().transition || 'default', // default/cube/page/concave/zoom/linear/fade/none
+				transition: Reveal.getQueryHash().transition || 'linear', // default/cube/page/concave/zoom/linear/fade/none
 
 				// Optional libraries used to extend on reveal.js
 				dependencies: [
-					{ src: 'lib/js/classList.js', condition: function() { return !document.body.classList; } },
-					{ src: 'plugin/markdown/showdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
-					{ src: 'plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
-					{ src: 'plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } },
-					{ src: 'plugin/zoom-js/zoom.js', async: true, condition: function() { return !!document.body.classList; } },
-					{ src: 'plugin/notes/notes.js', async: true, condition: function() { return !!document.body.classList; } }
+					{ src: '../lib/js/classList.js', condition: function() { return !document.body.classList; } },
+					{ src: '../plugin/markdown/showdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+					{ src: '../plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+					{ src: '../plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } },
+					{ src: '../plugin/zoom-js/zoom.js', async: true, condition: function() { return !!document.body.classList; } },
+					{ src: '../plugin/notes/notes.js', async: true, condition: function() { return !!document.body.classList; } }
 					// { src: 'plugin/remotes/remotes.js', async: true, condition: function() { return !!document.body.classList; } }
 				]
 			});
