@@ -8,8 +8,8 @@
 		<title>JVM Troubleshooting basics</title>
 
 		<link rel="stylesheet" href="../css/reveal.min.css" />
-		<!-- <link rel="stylesheet" href="../css/theme/openshift/openshift.css" id="theme" /> -->
-		<link rel="stylesheet" href="../css/theme/sky.css" id="theme" />
+		<link rel="stylesheet" href="../css/theme/openshift/openshift.css" id="theme" />
+		<!-- <link rel="stylesheet" href="../css/theme/sky.css" id="theme" /> -->
 		<link rel="stylesheet" href="../lib/css/zenburn.css" />
 
 		<!-- If the query includes 'print-pdf', include the PDF print sheet -->
@@ -60,7 +60,6 @@
 						<li>Garbage collection. How does it work?</li>
 						<li>Keywords. What to ask for?</li>
 						<li>Now what? What does it mean?</li>
-						<li>OK. What to look for now?</li>
 					</ul>
 				</section>
 
@@ -104,7 +103,7 @@
 						The young generation is divided in eden and two survivor spaces,
 						<code>s1</code> and <code>s2</code> or <code>to</code> and <code>from</code>.
 					</div>
-					<img src="sun-hotspot-memory-1.jpg" />
+					<img width="500" src="sun-hotspot-memory-1.jpg" />
 					<img src="heap-memory-movement-1.png" />
 				</section>
 
@@ -146,7 +145,7 @@
 					<h3>What does it mean?</h3>
 					<br />
 					Garbage collection log
-					<pre style="font-size: 0.6em;">
+					<pre style="font-size: 0.7em;">
 41.409: [GC [PSYoungGen: 229368K->32766K(170240K)]<br /> 245617K->63556K(956672K), 0.0984634 secs]
 297.064: [Full GC [PSYoungGen: 11204K->6035K(248192K)]<br /> [PSOldGen: 781325K->786431K(786432K)] 792529K->792467K(1034624K)<br /> [PSPermGen: 76972K->76972K(159936K)], 2.7347630 secs]
 315.122: [Full GC [PSYoungGen: 233984K->1475K(248192K)]<br /> [PSOldGen: 779074K->786431K(786432K)] 1013058K->787907K(1034624K)<br /> [PSPermGen: 75462K->75462K(145344K)], 2.7821755 secs]
@@ -158,6 +157,9 @@
 					<h3>What does it mean?</h3>
 					<br />
 					<div>Garbage collection log demo</div>
+					<div>Tools: Vim, GCViewer</div>
+					<div>https://github.com/chewiebug/GCViewer</div>
+					<div>Case: 01101100</div>
 				</section>
 
 				<section>
@@ -165,6 +167,56 @@
 					<h3>What does it mean?</h3>
 					<br />
 					<div>Thread dump</div>
+					<pre >
+"ajp-/172.16.1.155:8209-28" daemon prio=10 tid=0x000000005ef10800 nid=0x160d waiting for monitor entry [0x00002ad28300e000]
+   java.lang.Thread.State: BLOCKED (on object monitor)
+	at org.jboss.as.web.session.DistributableSessionManager.storeSession(DistributableSessionManager.java:843)
+	- waiting to lock <0x00000000bf2f8c30> (a org.jboss.as.web.session.SessionBasedClusteredSession)
+	at org.jboss.as.web.session.InstantSnapshotManager.snapshot(InstantSnapshotManager.java:47)
+	at org.jboss.as.web.session.ClusteredSessionValve.handleRequest(ClusteredSessionValve.java:142)
+	at org.jboss.as.web.session.ClusteredSessionValve.invoke(ClusteredSessionValve.java:99)
+	at org.jboss.as.web.session.JvmRouteValve.invoke(JvmRouteValve.java:92)
+	at org.jboss.as.web.session.LockingValve.invoke(LockingValve.java:64)
+	at org.jboss.as.jpa.interceptor.WebNonTxEmCloserValve.invoke(WebNonTxEmCloserValve.java:50)
+	at org.jboss.as.web.security.SecurityContextAssociationValve.invoke(SecurityContextAssociationValve.java:169)
+	at org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:155)
+	at org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:102)
+	at org.apache.catalina.valves.AccessLogValve.invoke(AccessLogValve.java:567)
+	at org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:109)
+	at org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:372)
+	at org.apache.coyote.ajp.AjpProcessor.process(AjpProcessor.java:505)
+	at org.apache.coyote.ajp.AjpProtocol$AjpConnectionHandler.process(AjpProtocol.java:453)
+	at org.apache.tomcat.util.net.JIoEndpoint$Worker.run(JIoEndpoint.java:931)
+	at java.lang.Thread.run(Thread.java:662)
+					</pre>
+				</section>
+
+				<section>
+					<h2>Now What?</h2>
+					<h3>What does it mean?</h3>
+					<br />
+					<div>Thread dump demo</div>
+					<div>Tool: TDA</div>
+					<div>https://java.net/projects/tda/downloads</div>
+					<div>Case: 01114520</div>
+				</section>
+
+				<section>
+					<h2>Now What?</h2>
+					<h3>What does it mean?</h3>
+					<br />
+					<div>Heap dump</div>
+					<img height="500" src="mat_screenshot.png" />
+				</section>
+
+				<section>
+					<h2>Now What?</h2>
+					<h3>What does it mean?</h3>
+					<br />
+					<div>Heap dump demo</div>
+					<div>Tool: MAT</div>
+					<div>https://eclipse.org/mat</div>
+					<div>Case: 01135112</div>
 				</section>
 			</div>
 		</div>
