@@ -40,7 +40,7 @@
  *********************************************/
 body {
   background-color: #191919;
-  background-image: url("images/logo-wide-white.png"), url("images/mts-bottom-transparent.png"), url("images/planets.png"), url("images/stars.png"), url("images/noise.png");
+  background-image: url("images/RHJB_Middleware_Logotype_RGB-White_0213_cw_72.png"), url("images/mts-bottom-transparent.png"), url("images/planets.png"), url("images/stars.png"), url("images/noise.png");
   background-repeat: no-repeat, repeat-x, no-repeat, repeat, repeat;
   background-position: 3% 97%, center bottom, center -130px, 100% 122px, 0 0;
   background-size: 15%, auto 25%, auto, auto, auto;
