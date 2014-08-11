@@ -47,8 +47,8 @@
 					<br />
 					<small>
 						<p>Brought to you by</p>
-						<p><b>Ingo "Mr_White" Weiss</b></p>
-						<p><a href="mailto:ingo@redhat.com">ingo@redhat.com</a></p>
+						<p><b>Ingo Weiss</b></p>
+						<p><a href="mailto:ingo@redhat.com">ingo@redhat.com</a> or Mr_White on IRC</p>
 					</small>
 				</section>
 
@@ -76,7 +76,8 @@
 					</div>
 					<br />
 					<ul>
-						<li>Heap memory, divided in young and tenured or old generations</li>
+						<li>Heap memory, divided in <code>young</code> and <code>tenured</code>
+						 or <code>old</code> generations</li>
 						<li>Non-heap memory, divided in permanent generation and other</li>
 						<li>Other memory</li>
 					</ul>
@@ -90,7 +91,7 @@
 						<li>Heap memory, is used to store user-created Java objects</li>
 						<li>Non-heap memory, is used by Java to store loaded classes and
 							other metadata, such as the string pool, data structures and so on</li>
-						<li>The rest is used for JVM code itself, JVM internal structures,
+						<li>The rest is used for JVM code itself, JVM internal structures, thread stacks
 							loaded profiler agent code, data and so on</li>
 					</ul>
 				</section>
@@ -104,10 +105,16 @@
 						<code>s1</code> and <code>s2</code> or <code>to</code> and <code>from</code>.
 					</div>
 					<img width="500" src="sun-hotspot-memory-1.jpg" />
-					<img src="heap-memory-movement-1.png" />
 					<small>
 						<div>* This is a bit different for the G1 garbage collector</div>	
 					</small>					
+				</section>
+
+				<section>
+					<h2>Garbage collection</h2>
+					<h3>How does it work?</h3>
+					<br />
+					<img width="500" src="heap-memory-movement-1.png" />
 				</section>
 
 				<section>
@@ -115,19 +122,20 @@
 					<h3>What to ask for?</h3>
 					<br />
 					<ul>
-						<li><font color="red">Performance? Slow server?</font></li>
+						<li><font color="red">Performance? Slow server? Slow startup/shutdown?</font></li>
 						<ul>
 							<li>Garbage Collection(GC) log.</li>
+							<li>Thread dump</li>
+						</ul>
+						<li><font color="red">Lockup? High CPU utilization?</font></li>
+						<ul>
+							<li>Thread dump</li>
 						</ul>
 						<li><font color="red">OutOfMemoryError (OOME):</font></li>
 						<ul>
 							<li><font color="red">Out of heap?</font> Heap dump</li>
 							<li><font color="red">Out of PermGen?</font> GC log</li>
-							<li><font color="red">Native threads?</font> Nothing Java specific</li>
-						</ul>
-						<li><font color="red">Lockup? High CPU? Slow startup/shutdown?</font></li>
-						<ul>
-							<li>Thread dump</li>
+							<li><font color="red">Native threads?</font> Nothing Java specific. Look at the OS.</li>
 						</ul>
 					</ul>
 				</section>
@@ -161,7 +169,7 @@
 					<br />
 					<div>Garbage collection log demo</div>
 					<div>Tools: Vim, GCViewer</div>
-					<div>https://github.com/chewiebug/GCViewer</div>
+					<div><a href="https://github.com/chewiebug/GCViewer" target="_blank">https://github.com/chewiebug/GCViewer</a></div>
 					<div>Case: 01101100</div>
 				</section>
 
@@ -200,7 +208,7 @@
 					<br />
 					<div>Thread dump demo</div>
 					<div>Tool: TDA</div>
-					<div>https://java.net/projects/tda/downloads</div>
+					<div><a href="https://java.net/projects/tda/downloads" target="_blank">https://java.net/projects/tda/downloads</a></div>
 					<div>Case: 01114520</div>
 				</section>
 
@@ -218,7 +226,7 @@
 					<br />
 					<div>Heap dump demo</div>
 					<div>Tool: MAT</div>
-					<div>https://eclipse.org/mat</div>
+					<div><a href="https://eclipse.org/mat" target="_blank">https://eclipse.org/mat</a></div>
 					<div>Case: 01135112</div>
 				</section>
 
@@ -228,11 +236,25 @@
 					<ul>
 						<li>JVM Config helps you configure the JVM without mad Google skills.</li>
 						<ul>
-							<li><a href="https://access.redhat.com/labs/jvmconfig">https://access.redhat.com/labs/jvmconfig</a></li>
+							<li><a href="https://access.redhat.com/labs/jvmconfig" target="_blank">https://access.redhat.com/labs/jvmconfig</a></li>
 						</ul>
 						<li>Garbagedog will parse garbage collection log files and show you nice graphics for heap and GC pauses together with some statistics.</li>
 						<ul>
-							<li><a href="https://access.redhat.com/labs/garbagedog">https://access.redhat.com/labs/garbagedog</a></li>
+							<li><a href="https://access.redhat.com/labs/garbagedog" target="_blank">https://access.redhat.com/labs/garbagedog</a></li>
+						</ul>
+					</ul>
+				</section>
+
+				<section>
+					<h2>References</h2>
+					<br />
+					<ul>
+						<li>How to create a heap dump: <a href="https://access.redhat.com/site/solutions/21109" target="_blank">https://access.redhat.com/site/solutions/21109</a></li>
+						<li>How to enable garbage collection: <a href="https://access.redhat.com/site/solutions/18656" target="_blank">https://access.redhat.com/site/solutions/18656</a></li>
+						<li>How to create thread dumps</li>
+						<ul>
+							<li>On Windows: <a href="https://access.redhat.com/site/solutions/19170" target="_blank">https://access.redhat.com/site/solutions/19170</a></li>
+							<li>On Linux/Solaris: <a href="https://access.redhat.com/site/solutions/18178" target="_blank">https://access.redhat.com/site/solutions/18178</a></li>
 						</ul>
 					</ul>
 				</section>
